@@ -90,3 +90,43 @@ aboutTl.from(".about__content", {
     duration: 0.8,
     ease: "back.out(1.7)"
 }, "-=0.5");
+// Animazione Cards Innovazione
+gsap.from(".innov-card", {
+    scrollTrigger: {
+        trigger: ".innovation__grid",
+        start: "top 75%",
+    },
+    y: 100,
+    opacity: 0,
+    duration: 1,
+    stagger: 0.2,
+    ease: "power4.out"
+});
+
+// Effetto parallasse leggero sulle card durante lo scroll
+document.querySelectorAll('.innov-card').forEach(card => {
+    const speed = card.getAttribute('data-speed') || 1;
+    
+    gsap.to(card, {
+        scrollTrigger: {
+            trigger: card,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true
+        },
+        y: (i, target) => -20 * speed,
+        ease: "none"
+    });
+});
+// Animazione Sezione Blog
+gsap.from(".blog-card", {
+    scrollTrigger: {
+        trigger: ".blog__grid",
+        start: "top 80%",
+    },
+    opacity: 0,
+    x: (i) => (i % 2 === 0 ? -30 : 30), // Alterna entrata da destra e sinistra
+    duration: 1.2,
+    stagger: 0.2,
+    ease: "power2.out"
+});
