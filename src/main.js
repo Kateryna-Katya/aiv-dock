@@ -29,3 +29,64 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         });
     });
 });
+// Animazione Hero con GSAP e SplitType
+const heroTitle = new SplitType('#hero-title', { types: 'words, chars' });
+
+gsap.from(heroTitle.chars, {
+    opacity: 0,
+    y: 50,
+    rotateX: -90,
+    stagger: 0.02,
+    duration: 1,
+    ease: "back.out(1.7)",
+});
+
+gsap.from(".hero__subtitle", {
+    opacity: 0,
+    y: 20,
+    duration: 1,
+    delay: 0.8,
+    ease: "power2.out"
+});
+
+gsap.from(".hero__actions", {
+    opacity: 0,
+    y: 20,
+    duration: 1,
+    delay: 1,
+    ease: "power2.out"
+});
+
+gsap.from(".hero__visual", {
+    opacity: 0,
+    scale: 0.9,
+    duration: 1.5,
+    delay: 0.5,
+    ease: "expo.out"
+});
+// Registrazione plugin
+gsap.registerPlugin(ScrollTrigger);
+
+// Animazione Sezione About
+const aboutTl = gsap.timeline({
+    scrollTrigger: {
+        trigger: ".about",
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse"
+    }
+});
+
+aboutTl.from(".about__content", {
+    x: -50,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out"
+})
+.from(".info-card", {
+    y: 60,
+    opacity: 0,
+    stagger: 0.2,
+    duration: 0.8,
+    ease: "back.out(1.7)"
+}, "-=0.5");
